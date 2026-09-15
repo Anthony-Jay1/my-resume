@@ -8,6 +8,7 @@
     :root {
       --main:    #2c3e50;
       --accent:  #16a085;
+      --accent2: #27ae60;
       --bg:      #f8f9fa;
       --text:    #333333;
       --muted:   #6c757d;
@@ -32,18 +33,18 @@
       max-width: 820px;
       margin: 0 auto;
       background: var(--card);
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
       overflow: hidden;
     }
 
-    /* ===== Navigation Bar ===== */
+    /* ===== Navigation ===== */
     .resume-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
       background: #ffffff;
-      padding: 12px 32px;
+      padding: 12px 24px;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -55,33 +56,64 @@
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 16px;
-      transition: background 0.15s ease, color 0.15s ease;
+      padding: 7px 15px;
+      border-radius: 18px;
+      transition: all 0.2s ease;
     }
     .resume-nav a:hover {
       background: var(--accent);
       color: #ffffff;
+      transform: translateY(-1px);
     }
 
-    /* ===== Header ===== */
+    /* ===== Hero ===== */
     .resume-header {
-      background: var(--main);
+      background: linear-gradient(135deg, #1a252f 0%, #2c3e50 50%, #16a085 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 12s ease infinite;
       color: #ffffff;
-      padding: 36px 32px;
+      padding: 48px 32px;
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 32px;
       flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
     }
+    .resume-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(22,160,133,0.25), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08), transparent 45%);
+      pointer-events: none;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
     .photo-wrap {
       flex-shrink: 0;
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       overflow: hidden;
-      border: 4px solid var(--accent);
+      border: 5px solid #ffffff;
       background: #ffffff;
+      box-shadow:
+        0 0 0 6px rgba(22, 160, 133, 0.25),
+        0 10px 30px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-wrap:hover {
+      transform: scale(1.03);
+      box-shadow:
+        0 0 0 8px rgba(22, 160, 133, 0.35),
+        0 12px 36px rgba(0,0,0,0.3);
     }
     .photo-wrap img {
       width: 100%;
@@ -90,18 +122,21 @@
       object-position: center top;
       display: block;
     }
-    .intro { flex: 1; min-width: 240px; }
+
+    .intro { flex: 1; min-width: 240px; position: relative; z-index: 1; }
     .intro h1 {
       margin: 0 0 8px;
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      line-height: 1.3;
     }
     .intro p {
-      margin: 0 0 16px;
+      margin: 0 0 18px;
       font-size: 1.05rem;
       color: #d5dde5;
     }
+
     .speak-btn {
       display: inline-flex;
       align-items: center;
@@ -109,25 +144,83 @@
       background: var(--accent);
       color: #ffffff;
       border: none;
-      padding: 10px 20px;
-      border-radius: 24px;
+      padding: 11px 24px;
+      border-radius: 26px;
       font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(22, 160, 133, 0.4);
     }
-    .speak-btn:hover  { background: #138d75; transform: translateY(-1px); }
+    .speak-btn:hover  {
+      background: #138d75;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(22, 160, 133, 0.55);
+    }
     .speak-btn:active { transform: translateY(0); }
 
+    /* ===== Badges ===== */
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
+    }
+
     /* ===== Sections ===== */
-    .resume-section { padding: 32px; }
+    .resume-section { padding: 36px 32px; }
     .resume-section + .resume-section { border-top: 1px solid var(--border); }
 
     .resume-section h2 {
-      margin: 0 0 20px;
-      font-size: 1.2rem;
+      margin: 0 0 22px;
+      font-size: 1.22rem;
       color: var(--main);
       border-left: 4px solid var(--accent);
-      padding-left: 12px;
+      padding-left: 14px;
+    }
+
+    /* ===== Counters ===== */
+    .counter-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    .counter {
+      text-align: center;
+      padding: 18px 10px;
+      background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease;
+    }
+    .counter:hover { transform: translateY(-3px); }
+    .counter .num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+    .counter .lbl {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.3px;
     }
 
     /* ===== Form ===== */
@@ -140,8 +233,8 @@
     .field-full { grid-column: 1 / -1; }
 
     .field label {
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.88rem;
+      font-weight: 700;
       color: var(--main);
       margin-bottom: 6px;
     }
@@ -151,20 +244,21 @@
     .field textarea {
       font-family: inherit;
       font-size: 0.95rem;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
       background: #fdfdfd;
       color: var(--text);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: all 0.2s ease;
     }
     .field input:focus,
     .field textarea:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(22,160,133,0.15);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(22, 160, 133, 0.15);
     }
-    .field textarea { resize: vertical; min-height: 80px; }
+    .field textarea { resize: vertical; min-height: 90px; }
 
     .actions {
       grid-column: 1 / -1;
@@ -172,28 +266,128 @@
       flex-direction: column;
       gap: 10px;
       margin-top: 4px;
+      align-items: center;
     }
     .actions button {
-      align-self: flex-start;
       background: var(--accent);
       color: #ffffff;
       border: none;
-      padding: 11px 28px;
-      border-radius: 24px;
+      padding: 12px 36px;
+      border-radius: 26px;
       font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease;
+      transition: all 0.2s ease;
     }
-    .actions button:hover  { background: #138d75; transform: translateY(-1px); }
-    .actions button:active { transform: translateY(0); }
-
+    .actions button:hover {
+      background: #138d75;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(22, 160, 133, 0.35);
+    }
     .form-msg {
       margin: 0;
       font-size: 0.9rem;
       min-height: 1.2em;
+      text-align: center;
     }
 
-    /* ===== Skills Section ===== */
+    /* ===== Language Cards ===== */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .lang-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 18px 14px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+    .lang-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(22, 160, 133, 0.15);
+    }
+    .lang-flag { font-size: 2rem; line-height: 1; margin-bottom: 6px; }
+    .lang-name {
+      font-weight: 700;
+      color: var(--main);
+      font-size: 0.98rem;
+    }
+    .lang-level {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .lang-bar {
+      margin-top: 10px;
+      background: #e1e4e8;
+      border-radius: 6px;
+      height: 6px;
+      overflow: hidden;
+    }
+    .lang-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0;
+      transition: width 1.2s ease;
+      border-radius: 6px;
+    }
+
+    /* ===== Timeline ===== */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      margin-top: 4px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), #ecf0f1);
+      border-radius: 2px;
+    }
+    .tl-item {
+      position: relative;
+      padding-bottom: 22px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 4px rgba(22, 160, 133, 0.12);
+    }
+    .tl-item h3 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      color: var(--main);
+    }
+    .tl-item .tl-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .tl-item p {
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* ===== Skills ===== */
     .skill { margin-bottom: 18px; }
     .skill:last-child { margin-bottom: 0; }
     .skill-name {
@@ -213,37 +407,41 @@
     }
     .skill-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent), #27ae60);
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
       border-radius: 10px;
       width: 0;
       transition: width 1.2s ease;
     }
 
-    /* ===== Contact Section ===== */
+    /* ===== Contact ===== */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     .contact-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px;
+      padding: 14px;
       background: #f8f9fa;
-      border-radius: 8px;
-      transition: background 0.15s ease;
+      border-radius: 10px;
+      border-left: 3px solid var(--accent);
+      transition: all 0.2s ease;
     }
-    .contact-item:hover { background: #eef2f5; }
+    .contact-item:hover {
+      background: #eef2f5;
+      transform: translateX(3px);
+    }
     .contact-icon {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       flex-shrink: 0;
       line-height: 1;
     }
     .contact-item strong {
       display: block;
       color: var(--main);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
     .contact-item p {
       margin: 2px 0 0;
@@ -252,44 +450,49 @@
       word-break: break-all;
     }
 
-    /* ===== Fade-in Animation ===== */
+    /* ===== Animation ===== */
     .resume-section {
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
+      animation: fadeInUp 0.7s ease forwards;
     }
     .resume-section:nth-of-type(1) { animation-delay: 0.05s; }
     .resume-section:nth-of-type(2) { animation-delay: 0.20s; }
     .resume-section:nth-of-type(3) { animation-delay: 0.35s; }
     .resume-section:nth-of-type(4) { animation-delay: 0.50s; }
+    .resume-section:nth-of-type(5) { animation-delay: 0.65s; }
+    .resume-section:nth-of-type(6) { animation-delay: 0.80s; }
 
     @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ===== Footer ===== */
     .resume-footer {
       text-align: center;
-      padding: 18px;
+      padding: 20px;
       font-size: 0.85rem;
       color: var(--muted);
+      background: #f4f6f8;
       border-top: 1px solid var(--border);
     }
 
     /* ===== Mobile ===== */
     @media (max-width: 640px) {
-      .resume-nav { padding: 10px 16px; }
-      .resume-nav a { padding: 5px 10px; font-size: 0.82rem; }
-      .resume-header { padding: 28px 20px; text-align: center;
-                       justify-content: center; }
-      .intro h1 { font-size: 1.35rem; }
-      .resume-section { padding: 24px 20px; }
+      .resume-header { padding: 32px 20px; text-align: center;
+                       justify-content: center; gap: 20px; }
+      .photo-wrap { width: 120px; height: 120px; }
+      .intro h1 { font-size: 1.4rem; }
+      .intro p  { font-size: 0.98rem; }
+      .badge-row { justify-content: center; }
+      .resume-nav { padding: 10px 14px; }
+      .resume-nav a { padding: 5px 10px; font-size: 0.8rem; }
+      .resume-section { padding: 26px 20px; }
       form { grid-template-columns: 1fr; }
+      .counter-row { grid-template-columns: repeat(2, 1fr); }
+      .lang-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
-      .actions button { width: 100%; text-align: center; }
+      .actions button { width: 100%; }
     }
   </style>
 </head>
@@ -297,15 +500,17 @@
 
   <main class="resume" id="top">
 
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav class="resume-nav">
       <a href="#top">🏠 Home</a>
-      <a href="#info">📋 Information</a>
+      <a href="#info">📋 Info</a>
+      <a href="#languages">🌐 Languages</a>
+      <a href="#timeline">📅 Journey</a>
       <a href="#skills">💼 Skills</a>
       <a href="#contact">📧 Contact</a>
     </nav>
 
-    <!-- Header -->
+    <!-- Hero -->
     <header class="resume-header">
       <div class="photo-wrap" id="photoWrap" hidden>
         <img id="photo" src="photo.jpg" alt="个人照片">
@@ -316,8 +521,37 @@
         <button id="speakBtn" class="speak-btn" aria-label="朗读介绍">
           🔊 <span>朗读 / Read Aloud</span>
         </button>
+        <div class="badge-row">
+          <span class="badge">🎓 Student</span>
+          <span class="badge">💻 Developer</span>
+          <span class="badge">🌍 Multilingual</span>
+          <span class="badge">⚽ Sports Fan</span>
+        </div>
       </div>
     </header>
+
+    <!-- Counters -->
+    <section class="resume-section" id="counters">
+      <h2>快速统计 / Quick Stats</h2>
+      <div class="counter-row">
+        <div class="counter">
+          <span class="num" data-target="3">0</span>
+          <div class="lbl">Languages</div>
+        </div>
+        <div class="counter">
+          <span class="num" data-target="4">0</span>
+          <div class="lbl">Hobbies</div>
+        </div>
+        <div class="counter">
+          <span class="num" data-target="4">0</span>
+          <div class="lbl">Skills</div>
+        </div>
+        <div class="counter">
+          <span class="num" data-target="1">0</span>
+          <div class="lbl">Portfolio</div>
+        </div>
+      </div>
+    </section>
 
     <!-- Info Form -->
     <section class="resume-section" id="info">
@@ -340,19 +574,13 @@
         </div>
 
         <div class="field">
-          <label for="school">学院/系 School or Department</label>
+          <label for="school">学院/系 School</label>
           <input id="school" name="school" type="text" value="Software Engineering">
         </div>
 
         <div class="field">
-          <label for="country">国家/地区 Country or Region</label>
+          <label for="country">国家/地区 Country</label>
           <input id="country" name="country" type="text" value="Nigeria">
-        </div>
-
-        <div class="field">
-          <label for="languages">语言 Languages</label>
-          <input id="languages" name="languages" type="text"
-                 value="English, Igbo, Chinese">
         </div>
 
         <div class="field">
@@ -374,7 +602,68 @@
       </form>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Languages -->
+    <section class="resume-section" id="languages">
+      <h2>语言 / Languages</h2>
+      <div class="lang-grid">
+
+        <div class="lang-card">
+          <div class="lang-flag">🇬🇧</div>
+          <div class="lang-name">English</div>
+          <div class="lang-level">Native / Fluent</div>
+          <div class="lang-bar"><div class="lang-fill" data-width="95%"></div></div>
+        </div>
+
+        <div class="lang-card">
+          <div class="lang-flag">🇨🇳</div>
+          <div class="lang-name">Chinese 中文</div>
+          <div class="lang-level">Intermediate</div>
+          <div class="lang-bar"><div class="lang-fill" data-width="65%"></div></div>
+        </div>
+
+        <div class="lang-card">
+          <div class="lang-flag">🇳🇬</div>
+          <div class="lang-name">Igbo</div>
+          <div class="lang-level">Native / Fluent</div>
+          <div class="lang-bar"><div class="lang-fill" data-width="95%"></div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="resume-section" id="timeline">
+      <h2>旅程 / Journey</h2>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-date">2024 — Present</div>
+          <h3>Software Engineering Student</h3>
+          <p>Studying core principles of software design, data structures, algorithms, and modern development practices.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2024</div>
+          <h3>Started Web Development</h3>
+          <p>Learned HTML, CSS, and JavaScript by building real projects — including this personal resume page.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Ongoing</div>
+          <h3>Multilingual Learning</h3>
+          <p>Actively improving Chinese while maintaining fluency in English and Igbo — building bridges across cultures.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Future Goal</div>
+          <h3>Building Meaningful Software</h3>
+          <p>Aiming to create digital solutions that solve real-world problems and improve people's lives.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills -->
     <section class="resume-section" id="skills">
       <h2>技能 / Skills</h2>
 
@@ -399,7 +688,7 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section class="resume-section" id="contact">
       <h2>联系 / Contact</h2>
       <div class="contact-grid">
@@ -408,7 +697,7 @@
           <span class="contact-icon">📧</span>
           <div>
             <strong>Email</strong>
-            <p>your-email@example.com</p>
+            <p>jibezugo@gmail.com</p>
           </div>
         </div>
 
@@ -446,10 +735,58 @@
   </main>
 
   <script>
-    /* ============ 1. Chinese Text-to-Speech ============ */
+    /* =========================================================
+       1. Chinese TTS — Split sentences for smooth playback
+       ========================================================= */
     const speakBtn = document.getElementById('speakBtn');
     const introName  = document.getElementById('introName').textContent.trim();
     const introClass = document.getElementById('introClass').textContent.trim();
+
+    let availableVoices = [];
+    function loadVoices() {
+      availableVoices = window.speechSynthesis.getVoices();
+    }
+    loadVoices();
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    const preferredVoices = [
+      'Mei-Jia', 'Ting-Ting', 'Tingting', 'Sin-Ji',
+      'Microsoft Xiaoxiao', 'Microsoft Xiaoyi',
+      'Google 普通话（中国大陆）', 'Google Chinese'
+    ];
+
+    function pickBestVoice() {
+      if (availableVoices.length === 0) loadVoices();
+      const zhVoices = availableVoices.filter(v =>
+        v.lang && v.lang.toLowerCase().startsWith('zh')
+      );
+      for (const name of preferredVoices) {
+        const match = zhVoices.find(v =>
+          v.name.toLowerCase().includes(name.toLowerCase())
+        );
+        if (match) return match;
+      }
+      return zhVoices[0] || null;
+    }
+
+    function speakSentence(text, onEnd) {
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang   = 'zh-CN';
+      utter.rate   = 1.0;
+      utter.pitch  = 1.0;
+      utter.volume = 1.0;
+
+      const voice = pickBestVoice();
+      if (voice) {
+        utter.voice = voice;
+        console.log('Using voice:', voice.name);
+      }
+
+      if (onEnd) utter.onend = onEnd;
+      window.speechSynthesis.speak(utter);
+    }
 
     speakBtn.addEventListener('click', () => {
       if (!('speechSynthesis' in window)) {
@@ -457,31 +794,24 @@
         return;
       }
       window.speechSynthesis.cancel();
-      const text = introName + ' ' + introClass;
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang  = 'zh-CN';
-      utterance.rate  = 1;
-      utterance.pitch = 1;
-
-      const voices = window.speechSynthesis.getVoices();
-      const zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
-      if (zhVoice) utterance.voice = zhVoice;
-
-      window.speechSynthesis.speak(utterance);
+      // Split into two utterances — prevents buffer overflow / cracking
+      speakSentence(introName, () => {
+        setTimeout(() => speakSentence(introClass), 200);
+      });
     });
 
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = () => {};
-    }
-
-    /* ============ 2. Optional Photo ============ */
+    /* =========================================================
+       2. Optional Photo
+       ========================================================= */
     const photoWrap = document.getElementById('photoWrap');
     const photo     = document.getElementById('photo');
 
     photo.addEventListener('load',  () => { photoWrap.hidden = false; });
     photo.addEventListener('error', () => { photoWrap.hidden = true;  });
 
-    /* ============ 3. Form Validation ============ */
+    /* =========================================================
+       3. Form Validation
+       ========================================================= */
     const form = document.getElementById('infoForm');
     const msg  = document.getElementById('formMsg');
 
@@ -504,13 +834,49 @@
       msg.style.color = '#16a085';
     });
 
-    /* ============ 4. Animate Skill Bars ============ */
+    /* =========================================================
+       4. Animate Skill & Language Bars
+       ========================================================= */
     window.addEventListener('load', () => {
-      document.querySelectorAll('.skill-fill').forEach(el => {
+      document.querySelectorAll('.skill-fill, .lang-fill').forEach(el => {
         const w = el.getAttribute('data-width') || '0%';
         setTimeout(() => { el.style.width = w; }, 400);
       });
     });
+
+    /* =========================================================
+       5. Animated Counters
+       ========================================================= */
+    function animateCounters() {
+      document.querySelectorAll('.counter .num').forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        let current = 0;
+        const step = Math.max(1, Math.floor(target / 30));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = current;
+        }, 30);
+      });
+    }
+
+    const countersSection = document.getElementById('counters');
+    if (countersSection && 'IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      obs.observe(countersSection);
+    } else {
+      animateCounters();
+    }
   </script>
 
 </body>
