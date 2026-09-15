@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anthony 沐辰 | 个人简历</title>
+  <style>
+    /* ===== Color Scheme =====
+       Main:     #2c3e50  (dark navy)
+       Accent:   #16a085  (teal)
+       Background: #f8f9fa (neutral light)
+       Text:     #333333  (neutral dark)
+    ========================== */
+    :root {
+      --main:    #2c3e50;
+      --accent:  #16a085;
+      --bg:      #f8f9fa;
+      --text:    #333333;
+      --muted:   #6c757d;
+      --border:  #e1e4e8;
+      --card:    #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei",
+                   "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    .resume {
+      max-width: 820px;          /* moderate width for readability */
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    /* ===== Header ===== */
+    .resume-header {
+      background: var(--main);
+      color: #ffffff;
+      padding: 36px 32px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .photo-wrap {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--accent);
+      background: #ffffff;
+    }
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .intro { flex: 1; min-width: 240px; }
+    .intro h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .intro p {
+      margin: 0 0 16px;
+      font-size: 1.05rem;
+      color: #d5dde5;
+    }
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .speak-btn:hover  { background: #138d75; transform: translateY(-1px); }
+    .speak-btn:active { transform: translateY(0); }
+
+    /* ===== Sections ===== */
+    .resume-section { padding: 32px; }
+    .resume-section + .resume-section { border-top: 1px solid var(--border); }
+
+    .resume-section h2 {
+      margin: 0 0 20px;
+      font-size: 1.2rem;
+      color: var(--main);
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    /* ===== Form ===== */
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+    }
+    .field { display: flex; flex-direction: column; }
+    .field-full { grid-column: 1 / -1; }
+
+    .field label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--main);
+      margin-bottom: 6px;
+    }
+    .field label .req { color: #c0392b; margin-left: 2px; }
+
+    .field input,
+    .field textarea {
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fdfdfd;
+      color: var(--text);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(22,160,133,0.15);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .actions button {
+      align-self: flex-start;
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 11px 28px;
+      border-radius: 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .actions button:hover  { background: #138d75; transform: translateY(-1px); }
+    .actions button:active { transform: translateY(0); }
+
+    .form-msg {
+      margin: 0;
+      font-size: 0.9rem;
+      min-height: 1.2em;
+    }
+
+    /* ===== Footer ===== */
+    .resume-footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== Mobile ===== */
+    @media (max-width: 640px) {
+      .resume-header { padding: 28px 20px; text-align: center;
+                       justify-content: center; }
+      .intro h1 { font-size: 1.35rem; }
+      .resume-section { padding: 24px 20px; }
+      form { grid-template-columns: 1fr; }
+      .actions button { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="resume">
+
+    <!-- ================= Header ================= -->
+    <header class="resume-header">
+      <div class="photo-wrap" id="photoWrap" hidden>
+        <img id="photo" src="photo.jpg" alt="个人照片">
+      </div>
+      <div class="intro">
+        <h1 id="introName">你好，我是 Anthony 沐辰。</h1>
+        <p  id="introClass">我是 Software Engineering 的学生。</p>
+        <button id="speakBtn" class="speak-btn" aria-label="朗读介绍">
+          🔊 <span>朗读 / Read Aloud</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ================= Info Form ================= -->
+    <section class="resume-section">
+      <h2>基本信息 / Basic Information</h2>
+      <form id="infoForm" novalidate>
+
+        <div class="field">
+          <label for="name">姓名 Name<span class="req">*</span></label>
+          <input id="name" name="name" type="text" value="Anthony 沐辰" required>
+        </div>
+
+        <div class="field">
+          <label for="class">班级 Class<span class="req">*</span></label>
+          <input id="class" name="class" type="text" value="Software Engineering" required>
+        </div>
+
+        <div class="field">
+          <label for="sid">学号 Student ID<span class="req">*</span></label>
+          <input id="sid" name="sid" type="text" value="2462710007L" required>
+        </div>
+
+        <div class="field">
+          <label for="school">学院/系 School or Department</label>
+          <input id="school" name="school" type="text" value="Computer Science">
+        </div>
+
+        <div class="field">
+          <label for="country">国家/地区 Country or Region</label>
+          <input id="country" name="country" type="text" value="Nigeria">
+        </div>
+
+        <div class="field">
+          <label for="languages">语言 Languages</label>
+          <input id="languages" name="languages" type="text"
+                 value="English, Igbo, Chinese">
+        </div>
+
+        <div class="field">
+          <label for="hobbies">爱好 Hobbies</label>
+          <input id="hobbies" name="hobbies" type="text"
+                 value="Football, Gaming, Eating, Sleeping">
+        </div>
+
+        <div class="field field-full">
+          <label for="about">自我介绍 About Me</label>
+          <textarea id="about" name="about" rows="3">I'm Jibeze Anthony Ugonna, a software engineering student passionate about technology, innovation, and problem-solving. I'm continuously developing my technical and creative skills while exploring opportunities to build meaningful digital solutions.</textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit">提交 / Submit</button>
+          <p id="formMsg" class="form-msg" role="status"></p>
+        </div>
+
+      </form>
+    </section>
+
+    <footer class="resume-footer">
+      © 2026 Anthony 沐辰 · Software Engineering
+    </footer>
+
+  </main>
+
+  <script>
+    /* =========================================================
+       1. Chinese Text-to-Speech
+       ========================================================= */
+    const speakBtn = document.getElementById('speakBtn');
+    const introName  = document.getElementById('introName').textContent.trim();
+    const introClass = document.getElementById('introClass').textContent.trim();
+
+    speakBtn.addEventListener('click', () => {
+      if (!('speechSynthesis' in window)) {
+        alert('抱歉，您的浏览器不支持语音朗读。\nSorry, your browser does not support speech synthesis.');
+        return;
+      }
+      // Stop any previous utterance
+      window.speechSynthesis.cancel();
+
+      const text = introName + ' ' + introClass;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang  = 'zh-CN';
+      utterance.rate  = 1;
+      utterance.pitch = 1;
+
+      // Prefer a Chinese voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
+      if (zhVoice) utterance.voice = zhVoice;
+
+      window.speechSynthesis.speak(utterance);
+    });
+
+    // Some browsers load voices asynchronously
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {};
+    }
+
+    /* =========================================================
+       2. Optional Photo (photo.jpg)
+       ========================================================= */
+    const photoWrap = document.getElementById('photoWrap');
+    const photo     = document.getElementById('photo');
+
+    photo.addEventListener('load',  () => { photoWrap.hidden = false; });
+    photo.addEventListener('error', () => { photoWrap.hidden = true;  });
+
+    /* =========================================================
+       3. Form Validation
+       ========================================================= */
+    const form = document.getElementById('infoForm');
+    const msg  = document.getElementById('formMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const requiredIds = ['name', 'class', 'sid'];
+      const missing = requiredIds.filter(id => !form[id].value.trim());
+
+      if (missing.length > 0) {
+        const labels = missing.map(id => {
+          const label = form[id].previousElementSibling;
+          return label ? label.textContent.replace('*', '').trim() : id;
+        });
+        msg.textContent = '请填写必填项：' + labels.join('、');
+        msg.style.color = '#c0392b';
+        return;
+      }
+
+      msg.textContent = '提交成功！信息已完整。 / Submitted successfully!';
+      msg.style.color = '#16a085';
+    });
+  </script>
+
+</body>
+</html>
